@@ -121,34 +121,6 @@ else
     datac = cat(ndim+1, datac{:});
 end
 
-
-
-    
-%     
-% 
-% [tunq,ii,jj] = uniquetol(tclim, dt/2);
-% tclim = tunq(jj);
-% 
-% if nfun == 1
-%     [timec, datac, ind] = consolidator(tclim, data, fun);
-% else
-%     [timec, datac{1}, ind] = consolidator(tclim, data, fun{1});
-%     for ifn = 2:length(fun)
-%         [blah, datac{ifn}] = consolidator(tclim, data, fun{ifn});
-%     end
-% end
-%     
-% if calcbounds
-%     [blah, upper] = consolidator(tclim, data, @(x) prctile(x,75), dt/2);
-%     [blah, lower] = consolidator(tclim, data, @(x) prctile(x,25), dt/2);
-%     
-% %     if any(upper < datac) || any(lower > datac)
-% %         disp('Outliers skewing mean; using median instead');
-% %     end
-% %     [timec, datac, ind] = consolidator(tclim, data, @nanmedian, dt/2);
-%     
-% end
-
 % Expand if necessary
 
 if expand
