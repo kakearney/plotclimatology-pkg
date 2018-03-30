@@ -450,8 +450,19 @@ for ii = 1:length(xl)
     if strcmp(nanflag, 'fill')
         xp{ii} = inpaint_nans(xp{ii}', 4);
         yp{ii} = inpaint_nans(yp{ii}', 4);
+        if iseq % need to maintain NaNs for zero-width bug
+            nx = length(xp{ii});
+            xp{ii}((nx/2)+1:end) = NaN;
+        end
     elseif strcmp(nanflag, 'remove')
-        isn = isnan(xp{ii}) | isnan(yp{ii});
+        if iseq
+            nx = length(xp{ii});
+            keepnan = false(size(xp));
+            keepnan((nx/2)+1:end) = true;
+            isn = (isnan(xp{ii}) | isnan(yp{ii})) & ~keepnan;
+        else
+            isn = isnan(xp{ii}) | isnan(yp{ii});
+        end
         xp{ii} = xp{ii}(~isn);
         yp{ii} = yp{ii}(~isn);
     end
